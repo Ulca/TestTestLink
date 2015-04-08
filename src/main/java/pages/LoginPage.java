@@ -1,18 +1,18 @@
 package pages;
 
-/**
- * Created by admin on 08.04.2015.
- */
 public class LoginPage {
 
     private static final String URL = "http://demo.testlink.org/latest/login.php";
 
-    private static final String login = "admin";
-    private static final String
-    private static final String
+
+    private static final By loginField = By.id("login");
+    private static final By passwordfield = By.name("t1_password");
+    private static final By loginButton = By.name("login_submit");
+
+    public
 
     public HomePage login(User user) {
-        driver.findElement()
+        driver.findElement();
     }
 
 }

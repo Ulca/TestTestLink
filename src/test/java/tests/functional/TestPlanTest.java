@@ -3,7 +3,7 @@ package tests.functional;
 import models.*;
 import pages.*;
 
-import static org.testng.*;
+import org.testng.*;
 
 public class TestPlanTest {
 
