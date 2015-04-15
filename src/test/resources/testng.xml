@@ -9,6 +9,6 @@
 
             <class name="tests.functional.TestPlanTest"/>
 
-            </classes>
+         </classes>
     </test>
 </suite>

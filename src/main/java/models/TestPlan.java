@@ -5,7 +5,7 @@ package models;
  */
 public class TestPlan {
 
-    public String testPlanName = "The Great Test Plan";
+    public String testPlanName = "Ze Great Test Plan";
 
     public String testPlanDescription = "The description of the Great Test Plan";
 

@@ -1,34 +1,48 @@
 package tests.functional;
 
+import org.openqa.selenium.firefox.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import org.openqa.selenium.*;
 import models.*;
 import pages.*;
 
-import org.testng.*;
+import java.util.concurrent.TimeUnit;
 
 public class TestPlanTest {
 
-    WebDriver driver;
+    private WebDriver driver;
+    private HomePage homePage;
+    protected static WebDriverWait wait;
 
     @BeforeTest
     public void login(){
         driver = new FirefoxDriver();
 
-        LoginPage loginPage = new LoginPage();
-        loginPage.login(new User());
+        wait = new WebDriverWait(driver, 30);
+
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
+
+        LoginPage loginPage = new LoginPage(driver);
+        homePage = loginPage.login(new User());
 
     }
 
     @Test
     public void createTestPlan(){
 
-        HomePage homePage = new HomePage(driver);
-        TestPlanMgmtPage testPlanMgmtPage = homePage.openTestManagement();
-        TestPlanEditPage editPage = testPlanMgmtPage.createTestPlan();
+    //    HomePage homePage = new HomePage(driver); //new HomePage(driver);
+        TestPlanManagementPage testPlanManagementPage = homePage.openTestManagement();
+        TestPlanEditPage editPage = testPlanManagementPage.createTestPlan();
 
         TestPlan testPlan = new TestPlan();
         editPage.createTestPlan(testPlan);
 
-        Assert.assertTrue(testPlanMgmtPage.isTestPlanPresent(testPlan));
+        Assert.assertTrue(testPlanManagementPage.testPlanIsPresent(testPlan));
 
         deleteTestPlan(testPlan);
 
@@ -43,14 +57,14 @@ public class TestPlanTest {
 
     public void deleteTestPlan(TestPlan testPlan){
 
-        TestPlanMgmtPage mgmtPage = new TestPlanMgmtPage(driver);
+        TestPlanManagementPage mgmtPage = new TestPlanManagementPage(driver);//new TestPlanMgmtPage(driver);
         mgmtPage.deleteTestPlan(testPlan);
 
     }
 
     public void logout(){
 
-        HomePage homePage = new HomePage();
+        //HomePage homePage = new HomePage(driver);
         homePage.logout();
 
     }
