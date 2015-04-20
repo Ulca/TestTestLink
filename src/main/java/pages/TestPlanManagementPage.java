@@ -7,9 +7,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by admin on 08.04.2015.
  */
-public class TestPlanManagementPage extends SuperPage {
-
-    private static TestPlan testPlan;
+public class TestPlanManagementPage extends SuperWorkPage {
 
     public static final By testPlanEditButton = By.name("create_testplan");
 
@@ -29,10 +27,8 @@ public class TestPlanManagementPage extends SuperPage {
 
     public void deleteTestPlan(TestPlan testPlan) {
 
-        if (driver.findElement(By.linkText(testPlan.testPlanName)) != null) {
-            //delete test plan
-            }
-
+        driver.findElement(By.xpath("//a[contains(text(),'"+ testPlan.testPlanName +"')]/ancestor::tr/td/img[@alt='Delete the test plan?']")).click();
+        driver.findElement(By.id("ext-gen20")).click();
 
     }
 
