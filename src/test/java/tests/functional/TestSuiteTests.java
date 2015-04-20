@@ -1,8 +1,8 @@
 package tests.functional;
 
 import models.TestCase;
+import models.TestStep;
 import models.TestSuite;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.*;
@@ -22,8 +22,7 @@ public class TestSuiteTests extends SuperTest {
         //open project control panel
         specPage.showProjectControlPanel();
         //open TS edit page & create TS
-        driver.findElement(By.id("new_testsuite")).click();
-        TestSuiteEditPage suiteEditPage = new TestSuiteEditPage(driver);
+        TestSuiteEditPage suiteEditPage = specPage.createTestSuite();
         TestSuite testSuite = new TestSuite();
         suiteEditPage.createTS(testSuite);
         Assert.assertTrue(specPage.suiteCreated(testSuite)); //check if TS exists
@@ -34,7 +33,6 @@ public class TestSuiteTests extends SuperTest {
     @Test (dependsOnMethods = {"createSuiteTest"})
     public void createTestTest(){
 
-
         TestSuite testSuite = new TestSuite();
         //display the TS
         SpecificationManagementPage specPage = new SpecificationManagementPage(driver);
@@ -42,8 +40,7 @@ public class TestSuiteTests extends SuperTest {
         //open project control panel
         specPage.showProjectControlPanel();
         //open TC edit page & create a test case
-        driver.findElement(By.id("create_tc")).click();
-        TestCaseEditPage caseEditPage = new TestCaseEditPage(driver);
+        TestCaseEditPage caseEditPage = specPage.createTestCase();
         TestCase testCase = new TestCase();
         caseEditPage.createTC(testCase);
         Assert.assertTrue(specPage.caseCreated(testSuite, testCase)); //check if TC exists
@@ -53,6 +50,17 @@ public class TestSuiteTests extends SuperTest {
     //create step test
     @Test (dependsOnMethods = {"createTestTest"})
     public void createStepTest(){
+
+        TestCase testCase = new TestCase();
+        TestStep testStep = new TestStep();
+        //display the TC
+        SpecificationManagementPage specPage = new SpecificationManagementPage(driver);
+        specPage.goToCase(testCase);
+        //click the button
+        TestStepEditPage editStep = specPage.createTestStep();
+        //open TC edit page & create a test case
+        editStep.createTestStep(testStep);
+//        Assert.assertTrue(specPage.stepCreated(testCase, testStep)); //check if TC exists
 
     }
 

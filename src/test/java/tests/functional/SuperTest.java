@@ -36,11 +36,8 @@ public class SuperTest {
     public void shutEnvironment() {
         logout();
         if (driver != null) {
-            try {
-                driver.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+           driver.quit();
+
             //  driver.quit();
         }
 

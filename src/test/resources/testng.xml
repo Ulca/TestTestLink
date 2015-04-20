@@ -5,7 +5,7 @@
 
     <test name="SmokeTest">
         <classes>
-            <class name="tests.functional.TestPlanTest" />
+            <!--<class name="tests.functional.TestPlanTest" />-->
             <class name="tests.functional.TestSuiteTests" />
          </classes>
     </test>
